@@ -1,0 +1,10 @@
+#!/usr/bin/ruby
+
+require 'mail_catcher'
+require 'anyway_config'
+
+ENV["MAILCATCHER_DAEMON"]  = "false"
+ENV["MAILCATCHER_QUIT"]    = "false"
+ENV["MAILCATCHER_SMTP_IP"] = ENV["MAILCATCHER_HTTP_IP"] = "0.0.0.0"
+
+MailCatcher.run!(Anyway::Config.for(:mailcatcher).map{|k,v| [k.to_sym,v]}.to_h)
